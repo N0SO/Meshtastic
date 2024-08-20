@@ -5,17 +5,15 @@
 # and IP address of your Meshtastic nodes.
 #
 import meshtastic.tcp_interface
+from __init__ import ipList
 from pubsub import pub
 from datetime import datetime
 import pytz
 import time
 #
 # Edit ipList as needed for your local nodes
-#
-ipList = { "N7IW" : "10.0.0.187",
-           'JR02' : '10.0.0.133',
-           'JR03' : '10.0.0.197',
-           'JR04' : '10.0.0.56'}
+#ipList moved to __init__.py
+#ipList = { "dad4" : "192.168.1.123"}
 
 def PrintIpList():
     for name, ip in ipList.items():
