@@ -16,6 +16,7 @@
 # and IP address of your Meshtastic nodes. 
 #
 import meshtastic.tcp_interface
+from __init__ import ipList
 from pubsub import pub
 from datetime import datetime
 import pytz
@@ -23,11 +24,13 @@ import time
 #
 # Edit ipList as needed for your local nodes
 #
+"""
+ipList moved to __init__.py
 ipList = { "N7IW" : "10.0.0.187",
            'JR02' : '10.0.0.133',
            'JR03' : '10.0.0.197',
            'JR04' : '10.0.0.56'}
-        
+"""        
 def GetLocalNode():
     valid = False
     while valid == False:
@@ -95,13 +98,28 @@ def onReceive(packet, interface):
         if 'decoded' in packet:
             if packet['decoded'].get('portnum') == 'TELEMETRY_APP':
                 if packet['from'] == dest_node :
+                    #print(f'-------- Packet:\n{packet}')
                     telemetry = packet['decoded'].get('telemetry', {})
+                    #print(f'telemetry type = {type(telemetry)}\n{dir(telemetry)}')
                     device_metrics = telemetry.get('deviceMetrics', {})
                     if device_metrics:
                         time  = GetCurrentTime()
                         level = device_metrics.get('batteryLevel', '???')
                         volts = device_metrics.get('voltage', '?.???')
                         txt = "{0} > Level: {1}%  Voltage: {2}v".format(time, level, volts)
+                        ClearDotLine()
+                        print (GetNodeName(packet['from']) + ":")
+                        print(txt)
+                        print ("------------------------------------------------------")
+                        NewDotLine()
+                    pwr_metrics = telemetry.get('powerMetrics', {})
+                    if pwr_metrics:
+                        time  = GetCurrentTime()
+                        batVolts = pwr_metrics.get('ch3Voltage', '??.???')
+                        batCurrent = pwr_metrics.get('ch3Current', '??.?')
+                        txt = \
+                        '{} > Power Voltage: {} VDC Power Current: {} mA'\
+                                 .format(time, batVolts, batCurrent)
                         ClearDotLine()
                         print (GetNodeName(packet['from']) + ":")
                         print(txt)
