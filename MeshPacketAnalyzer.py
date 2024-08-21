@@ -16,7 +16,7 @@ import time
 #
 """
 ipList moved to __init__.py
-ipList = { "dad4" : "192.168.1.123"}
+Need to add option to use serial interface in addition to IP.
 """
 def PrintIpList():
     for name, ip in ipList.items():
@@ -124,14 +124,14 @@ def onReceive(packet, interface):
             power_metrics = telemetry.get('powerMetrics', {})
             if power_metrics:
                 print("    Power Metrics:")
-                print(f"      CH1 Voltage: {power_metrics.get('ch1_voltage', 'N/A')}")
-                print(f"      CH1 Current: {power_metrics.get('ch1_current', 'N/A')}")
-                print(f"      CH2 Voltage: {power_metrics.get('ch2_voltage', 'N/A')}")
-                print(f"      CH2 Current: {power_metrics.get('ch2_current', 'N/A')}")
-                print(f"      CH3 Voltage: {power_metrics.get('ch3_voltage', 'N/A')}")
-                print(f"      CH3 Current: {power_metrics.get('ch3_current', 'N/A')}")
-                print(f"      CH4 Voltage: {power_metrics.get('ch4_voltage', 'N/A')}")
-                print(f"      CH4 Current: {power_metrics.get('ch4_current', 'N/A')}")
+                print(f"      CH1 Voltage: {power_metrics.get('ch1Voltage', 'N/A')}")
+                print(f"      CH1 Current: {power_metrics.get('ch1Current', 'N/A')}")
+                print(f"      CH2 Voltage: {power_metrics.get('ch2Voltage', 'N/A')}")
+                print(f"      CH2 Current: {power_metrics.get('ch2Current', 'N/A')}")
+                print(f"      CH3 Voltage: {power_metrics.get('ch3Voltage', 'N/A')}")
+                print(f"      CH3 Current: {power_metrics.get('ch3Current', 'N/A')}")
+                print(f"      CH4 Voltage: {power_metrics.get('ch4Voltage', 'N/A')}")
+                print(f"      CH4 Current: {power_metrics.get('ch4urrent', 'N/A')}")
             environment_metrics = telemetry.get('environmentMetrics', {})
             if environment_metrics:
                 print("    Environment Metrics:")
