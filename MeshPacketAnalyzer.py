@@ -131,7 +131,7 @@ def onReceive(packet, interface):
                 print(f"      CH3 Voltage: {power_metrics.get('ch3Voltage', 'N/A')}")
                 print(f"      CH3 Current: {power_metrics.get('ch3Current', 'N/A')}")
                 print(f"      CH4 Voltage: {power_metrics.get('ch4Voltage', 'N/A')}")
-                print(f"      CH4 Current: {power_metrics.get('ch4urrent', 'N/A')}")
+                print(f"      CH4 Current: {power_metrics.get('ch4Current', 'N/A')}")
             environment_metrics = telemetry.get('environmentMetrics', {})
             if environment_metrics:
                 print("    Environment Metrics:")
