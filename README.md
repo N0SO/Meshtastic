@@ -2,8 +2,9 @@ Based on the great work done by N7IW
 The original source code is located here:
 https://github.com/N7IW/Meshtastic.git
 
-**MeshPacketAnalyzer.py**
-decodes and displays all data from all packets received.
+**packetAnalyzer.py**
+Class packetAnalyzer was module MeshPacket Analyzer.
+Decodes and displays all data from all packets received.
 
 **MeshTrafficMonitor.py** 
 displays the time, type and source of each packet received, one line per per packet.
