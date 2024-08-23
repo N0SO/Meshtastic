@@ -19,11 +19,15 @@ ipList moved to __init__.py
 Need to add option to use serial interface in addition to IP.
 """
 class packetAnalyzer():
-    def __init__(self, node = None):
+    def __init__(self, node = None, serial = None):
         self.node = node
+        self.hostname = None
+        self.serial = serial
         if node:
-            self.ip_num = ipList.get(node, "None")
-            if self.ip_num == "None": 
+            ip_num = ipList.get(node, "None")
+            if ip_num == "None":
+                self.hostname = ip_num
+            else: 
                 print (f"> Node {node} not found. \n>")
                 exit()            
         else:
