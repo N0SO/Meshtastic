@@ -1,5 +1,6 @@
-This is a collection of python scripts I've written using the Meshtastic API.
-
+Based on the great work done by N7IW
+The original source code is located here:
+https://github.com/N7IW/Meshtastic.git
 
 **MeshPacketAnalyzer.py**
 decodes and displays all data from all packets received.
