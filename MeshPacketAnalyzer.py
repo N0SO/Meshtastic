@@ -45,7 +45,7 @@ def parseMyArgs():
 """ *** Executable Code Starts Here *** """
 if __name__ == '__main__':
     args = parseMyArgs()
-    mon = packetAnalyzer(args.nodeName)
+    mon = packetAnalyzer(node=args.nodeName, serial=args.deviceName)
     mon.mainLoop()
     """
     interface = meshtastic.tcp_interface.TCPInterface(mon.hostname)

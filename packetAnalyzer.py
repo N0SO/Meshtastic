@@ -4,7 +4,7 @@
 # The ipList dictionary must be edited to reflect the ShortName
 # and IP address of your Meshtastic nodes.
 #
-import meshtastic.tcp_interface
+import meshtastic.tcp_interface, meshtastic.serial_interface
 from __init__ import ipList, VERSION
 from meshtastic import mesh_pb2, storeforward_pb2, paxcount_pb2, BROADCAST_NUM
 from pubsub import pub
@@ -31,9 +31,10 @@ class packetAnalyzer():
             else: 
                 print (f"> Node {node} not found. \n>")
                 exit()            
-        else:
-            self.hostname = self.GetLocalNode()
-                
+        elif serial:
+            self.hostname = serial
+        print(f'{self.node}\n{self.serial}')
+                 
     def PrintIpList(self):
         for name, ip in ipList.items():
             print (name)
@@ -222,7 +223,11 @@ class packetAnalyzer():
         print()
         
     def mainLoop(self):
-        self.interface = meshtastic.tcp_interface.TCPInterface(self.hostname)
+        if self.node:
+            self.interface = meshtastic.tcp_interface.TCPInterface(self.hostname)
+        elif self.serial:
+            print(self.serial)
+            self.interface = meshtastic.serial_interface.SerialInterface(self.serial)            
         pub.subscribe(self.onReceive, 'meshtastic.receive')
         pub.subscribe(self.onConnection, 'meshtastic.connection.established')
 
