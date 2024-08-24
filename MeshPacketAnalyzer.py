@@ -31,21 +31,32 @@ def parseMyArgs():
 
     parser.add_argument('-d', '--deviceName',
                                    default = DEFAULTDEVICE,
-            help="""Use deviceName as serial input device.
-                    default is {}""".format(DEFAULTDEVICE))
+            help="""Use deviceName as connection to radio. This can be
+                    a serial port if connecting via radio USB port, or 
+                    the node short name of a WiFi/network connected 
+                    node. The available node short names and IP 
+                    addresses must be listed in the ipList dictionary 
+                    found in file __init__.py. Default is {} if
+                    serial==True, or {} if serial == False.""".\
+                    format(DEFAULTDEVICE, DEFAULTNODE))
 
-    parser.add_argument('-n', '--nodeName',
-                    default =  DEFAULTNODE,
-            help="""Use nodeName as default IP node. Default is {}"""\
-                    .format(DEFAULTNODE))
+    parser.add_argument('-s', '--serial',
+                    default =  False,
+                    action = 'store_true',
+            help="""The device specified in deviceName is a serial port.
+                    """)
     args = parser.parse_args()
+    """ Adjust default device name if not a serial port connection."""
+    if args.serial == False:
+        args.deviceName = DEFAULTNODE
     return args
 
 
 """ *** Executable Code Starts Here *** """
 if __name__ == '__main__':
     args = parseMyArgs()
-    mon = packetAnalyzer(node=args.nodeName, serial=args.deviceName)
+    print(args)
+    mon = packetAnalyzer(node=args.deviceName, serial=args.serial)
     mon.mainLoop()
     """
     interface = meshtastic.tcp_interface.TCPInterface(mon.hostname)

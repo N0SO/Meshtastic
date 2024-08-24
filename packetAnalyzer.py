@@ -21,19 +21,20 @@ Need to add option to use serial interface in addition to IP.
 class packetAnalyzer():
     def __init__(self, node = None, serial = None, interface = None):
         self.node = node
-        self.hostname = None
         self.serial = serial
         self.interface = interface
-        if node:
+        self.hostname = None
+        if serial:
+            self.hostname = node
+        else:
             ip_num = ipList.get(node, "None")
             if ip_num:
                 self.hostname = ip_num
             else: 
                 print (f"> Node {node} not found. \n>")
                 exit()            
-        elif serial:
-            self.hostname = serial
-        print(f'{self.node}\n{self.serial}')
+
+        #print(f'{self.node}\n{self.serial}')
                  
     def PrintIpList(self):
         for name, ip in ipList.items():
@@ -223,11 +224,11 @@ class packetAnalyzer():
         print()
         
     def mainLoop(self):
-        if self.node:
+        if self.serial:
+            #print(self.serial)
+            self.interface = meshtastic.serial_interface.SerialInterface(self.hostname)            
+        else:
             self.interface = meshtastic.tcp_interface.TCPInterface(self.hostname)
-        elif self.serial:
-            print(self.serial)
-            self.interface = meshtastic.serial_interface.SerialInterface(self.serial)            
         pub.subscribe(self.onReceive, 'meshtastic.receive')
         pub.subscribe(self.onConnection, 'meshtastic.connection.established')
 

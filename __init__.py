@@ -6,4 +6,4 @@
 ipList = {"dad4" : "192.168.1.123"}
 VERSION = '0.1.0'
 DEFAULTDEVICE = '/dev/ttyUSB0'
-DEFAULTNODE = None
+DEFAULTNODE = 'dad4'
