@@ -225,9 +225,10 @@ class packetAnalyzer():
         
     def mainLoop(self):
         if self.serial:
-            #print(self.serial)
+            print(f'Opening serial port {self.hostname}')
             self.interface = meshtastic.serial_interface.SerialInterface(self.hostname)            
         else:
+            print(f'Opening TCPIP {self.hostname}')
             self.interface = meshtastic.tcp_interface.TCPInterface(self.hostname)
         pub.subscribe(self.onReceive, 'meshtastic.receive')
         pub.subscribe(self.onConnection, 'meshtastic.connection.established')
